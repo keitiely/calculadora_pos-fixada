@@ -9,6 +9,12 @@ Um avaliador de expressões matemáticas em C que converte entre as notações i
 * Funções Matemáticas: raiz, sen, cos, tg, log. (Ângulos trigonométricos em graus).
 * Avalia Numericamente: Calcula o valor final em ambos os formatos.
 
+## Autores
+* Kenay Gomes Nobre
+* Keitiely Silva Viana
+* Gustavo Nascimento Ferreira
+* João Antonio de Souza Assunção
+* João Pedro de Oliveira Lima
 ---
 ## Como Usar
 Clone o repositório.
