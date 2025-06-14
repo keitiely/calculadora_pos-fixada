@@ -3,32 +3,36 @@
 #include <string.h>
 #include "expressao.h"
 
-// Função auxiliar para testar a partir de uma expressão pós-fixada
-void executarTestePosfixo(const char *id, const char *expressaoPosfixa)
+// Função auxiliar para rodar um ciclo completo de testes
+void executarTesteCicloCompleto(const char *id, const char *expressaoPosfixaOriginal)
 {
     printf("----------------------------------------\n");
     printf("Teste %s\n", id);
-    printf("Pós-fixa Original  : %s\n", expressaoPosfixa);
+    printf("1. Pós-fixa Original : %s\n", expressaoPosfixaOriginal);
 
     // É importante criar cópias, pois as funções podem modificar as strings
     char copiaParaInfixa[512];
-    strcpy(copiaParaInfixa, expressaoPosfixa);
+    strcpy(copiaParaInfixa, expressaoPosfixaOriginal);
 
     char copiaParaValor[512];
-    strcpy(copiaParaValor, expressaoPosfixa);
+    strcpy(copiaParaValor, expressaoPosfixaOriginal);
 
-    // 1. Testando: Pós-fixa -> Infixa
+    // 2. Converte de Pós-fixa para Infixa
     char *resultadoInfixa = getFormaInFixa(copiaParaInfixa);
-    printf("Infixa Convertida  : %s\n", resultadoInfixa);
+    printf("2. Infixa Convertida : %s\n", resultadoInfixa);
 
-    // 2. Testando: Avaliar o Valor da Pós-fixa
+    // 3. Pega a Infixa gerada e converte de volta para Pós-fixa
+    char *resultadoPosfixaReconvertido = getFormaPosFixa(resultadoInfixa);
+    printf("3. Pós-fixa Reconvertida: %s\n", resultadoPosfixaReconvertido);
+
+    // 4. Calcula o valor final a partir da Pós-fixa original
     float valorFinal = getValorPosFixa(copiaParaValor);
-    printf("Valor Calculado    : %.4f\n\n", valorFinal);
+    printf("4. Valor Calculado   : %.4f\n\n", valorFinal);
 }
 
 int main()
 {
-    printf("AVALIADOR DE EXPRESSOES NUMERICAS - NOVOS TESTES (A PARTIR DA POS-FIXA)\n\n");
+    printf("AVALIADOR DE EXPRESSOES NUMERICAS - TESTE DE CICLO COMPLETO\n\n");
 
     // Array com o novo conjunto de expressões pós-fixadas para testar
     const char *testes[] = {
@@ -37,16 +41,14 @@ int main()
         "9 raiz 2 3 ^ +",
         "90 sen 0 cos + 4 *",
         "15 4 % 5 +",
-        "2 1000 10 10 * / log *"
-    };
-    // Identificadores dos testes alterados para números
+        "2 1000 10 10 * / log *"};
     const char *ids[] = {"1", "2", "3", "4", "5", "6"};
     int numTestes = sizeof(testes) / sizeof(testes[0]);
 
     // Loop que executa o ciclo completo para cada novo teste
     for (int i = 0; i < numTestes; i++)
     {
-        executarTestePosfixo(ids[i], testes[i]);
+        executarTesteCicloCompleto(ids[i], testes[i]);
     }
 
     printf("----------------------------------------\n");
